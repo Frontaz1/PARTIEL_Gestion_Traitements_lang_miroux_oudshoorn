@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ConsultationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -17,8 +19,16 @@ class Consultation
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\OneToOne(mappedBy: 'consultation', cascade: ['persist', 'remove'])]
-    private ?Traitement $traitement = null;
+    #[ORM\ManyToOne(inversedBy: 'consultations')]
+    private ?Patient $patient = null;
+
+    #[ORM\OneToMany(mappedBy: 'consultation', targetEntity: Traitement::class)]
+    private Collection $traitements;
+
+    public function __construct()
+    {
+        $this->traitements = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -37,24 +47,44 @@ class Consultation
         return $this;
     }
 
-    public function getTraitement(): ?Traitement
+    public function getPatient(): ?Patient
     {
-        return $this->traitement;
+        return $this->patient;
     }
 
-    public function setTraitement(?Traitement $traitement): self
+    public function setPatient(?Patient $patient): self
     {
-        // unset the owning side of the relation if necessary
-        if ($traitement === null && $this->traitement !== null) {
-            $this->traitement->setConsultation(null);
-        }
+        $this->patient = $patient;
 
-        // set the owning side of the relation if necessary
-        if ($traitement !== null && $traitement->getConsultation() !== $this) {
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Traitement>
+     */
+    public function getTraitements(): Collection
+    {
+        return $this->traitements;
+    }
+
+    public function addTraitement(Traitement $traitement): self
+    {
+        if (!$this->traitements->contains($traitement)) {
+            $this->traitements->add($traitement);
             $traitement->setConsultation($this);
         }
 
-        $this->traitement = $traitement;
+        return $this;
+    }
+
+    public function removeTraitement(Traitement $traitement): self
+    {
+        if ($this->traitements->removeElement($traitement)) {
+            // set the owning side to null (unless already changed)
+            if ($traitement->getConsultation() === $this) {
+                $traitement->setConsultation(null);
+            }
+        }
 
         return $this;
     }

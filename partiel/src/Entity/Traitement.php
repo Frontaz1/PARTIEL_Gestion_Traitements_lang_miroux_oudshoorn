@@ -14,21 +14,33 @@ class Traitement
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column]
+    private ?int $duree = null;
+
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateDeb = null;
 
-    #[ORM\Column]
-    private ?int $duree = null;
+    #[ORM\ManyToOne(inversedBy: 'traitements')]
+    private ?Consultation $consultation = null;
 
     #[ORM\OneToOne(mappedBy: 'traitement', cascade: ['persist', 'remove'])]
     private ?Indication $indication = null;
 
-    #[ORM\OneToOne(inversedBy: 'traitement', cascade: ['persist', 'remove'])]
-    private ?Consultation $consultation = null;
-
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getDuree(): ?int
+    {
+        return $this->duree;
+    }
+
+    public function setDuree(int $duree): self
+    {
+        $this->duree = $duree;
+
+        return $this;
     }
 
     public function getDateDeb(): ?\DateTimeInterface
@@ -43,14 +55,14 @@ class Traitement
         return $this;
     }
 
-    public function getDuree(): ?int
+    public function getConsultation(): ?Consultation
     {
-        return $this->duree;
+        return $this->consultation;
     }
 
-    public function setDuree(int $duree): self
+    public function setConsultation(?Consultation $consultation): self
     {
-        $this->duree = $duree;
+        $this->consultation = $consultation;
 
         return $this;
     }
@@ -73,18 +85,6 @@ class Traitement
         }
 
         $this->indication = $indication;
-
-        return $this;
-    }
-
-    public function getConsultation(): ?Consultation
-    {
-        return $this->consultation;
-    }
-
-    public function setConsultation(?Consultation $consultation): self
-    {
-        $this->consultation = $consultation;
 
         return $this;
     }

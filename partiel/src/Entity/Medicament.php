@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MedicamentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MedicamentRepository::class)]
@@ -16,8 +18,13 @@ class Medicament
     #[ORM\Column(length: 50)]
     private ?string $libelle = null;
 
-    #[ORM\ManyToOne(inversedBy: 'medicament')]
-    private ?Indication $indication = null;
+    #[ORM\OneToMany(mappedBy: 'medicament', targetEntity: Indication::class)]
+    private Collection $indication;
+
+    public function __construct()
+    {
+        $this->indication = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -36,14 +43,32 @@ class Medicament
         return $this;
     }
 
-    public function getIndication(): ?Indication
+    /**
+     * @return Collection<int, Indication>
+     */
+    public function getIndication(): Collection
     {
         return $this->indication;
     }
 
-    public function setIndication(?Indication $indication): self
+    public function addIndication(Indication $indication): self
     {
-        $this->indication = $indication;
+        if (!$this->indication->contains($indication)) {
+            $this->indication->add($indication);
+            $indication->setMedicament($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIndication(Indication $indication): self
+    {
+        if ($this->indication->removeElement($indication)) {
+            // set the owning side to null (unless already changed)
+            if ($indication->getMedicament() === $this) {
+                $indication->setMedicament(null);
+            }
+        }
 
         return $this;
     }

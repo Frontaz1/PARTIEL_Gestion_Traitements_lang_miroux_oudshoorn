@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\IndicationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: IndicationRepository::class)]
@@ -15,22 +13,14 @@ class Indication
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 50)]
     private ?string $posologie = null;
-
-    #[ORM\ManyToOne(inversedBy: 'indication')]
-    private ?Patient $patient = null;
 
     #[ORM\OneToOne(inversedBy: 'indication', cascade: ['persist', 'remove'])]
     private ?Traitement $traitement = null;
 
-    #[ORM\OneToMany(mappedBy: 'indication', targetEntity: Medicament::class)]
-    private Collection $medicament;
-
-    public function __construct()
-    {
-        $this->medicament = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'indication')]
+    private ?Medicament $medicament = null;
 
     public function getId(): ?int
     {
@@ -49,18 +39,6 @@ class Indication
         return $this;
     }
 
-    public function getPatient(): ?Patient
-    {
-        return $this->patient;
-    }
-
-    public function setPatient(?Patient $patient): self
-    {
-        $this->patient = $patient;
-
-        return $this;
-    }
-
     public function getTraitement(): ?Traitement
     {
         return $this->traitement;
@@ -73,32 +51,14 @@ class Indication
         return $this;
     }
 
-    /**
-     * @return Collection<int, Medicament>
-     */
-    public function getMedicament(): Collection
+    public function getMedicament(): ?Medicament
     {
         return $this->medicament;
     }
 
-    public function addMedicament(Medicament $medicament): self
+    public function setMedicament(?Medicament $medicament): self
     {
-        if (!$this->medicament->contains($medicament)) {
-            $this->medicament->add($medicament);
-            $medicament->setIndication($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMedicament(Medicament $medicament): self
-    {
-        if ($this->medicament->removeElement($medicament)) {
-            // set the owning side to null (unless already changed)
-            if ($medicament->getIndication() === $this) {
-                $medicament->setIndication(null);
-            }
-        }
+        $this->medicament = $medicament;
 
         return $this;
     }

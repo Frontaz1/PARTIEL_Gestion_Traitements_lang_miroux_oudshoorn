@@ -37,12 +37,12 @@ class Patient
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateNaissance = null;
 
-    #[ORM\OneToMany(mappedBy: 'patient', targetEntity: Indication::class)]
-    private Collection $indication;
+    #[ORM\OneToMany(mappedBy: 'patient', targetEntity: Consultation::class)]
+    private Collection $consultations;
 
     public function __construct()
     {
-        $this->indication = new ArrayCollection();
+        $this->consultations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -135,29 +135,29 @@ class Patient
     }
 
     /**
-     * @return Collection<int, Indication>
+     * @return Collection<int, Consultation>
      */
-    public function getIndication(): Collection
+    public function getConsultations(): Collection
     {
-        return $this->indication;
+        return $this->consultations;
     }
 
-    public function addIndication(Indication $indication): self
+    public function addConsultation(Consultation $consultation): self
     {
-        if (!$this->indication->contains($indication)) {
-            $this->indication->add($indication);
-            $indication->setPatient($this);
+        if (!$this->consultations->contains($consultation)) {
+            $this->consultations->add($consultation);
+            $consultation->setPatient($this);
         }
 
         return $this;
     }
 
-    public function removeIndication(Indication $indication): self
+    public function removeConsultation(Consultation $consultation): self
     {
-        if ($this->indication->removeElement($indication)) {
+        if ($this->consultations->removeElement($consultation)) {
             // set the owning side to null (unless already changed)
-            if ($indication->getPatient() === $this) {
-                $indication->setPatient(null);
+            if ($consultation->getPatient() === $this) {
+                $consultation->setPatient(null);
             }
         }
 
