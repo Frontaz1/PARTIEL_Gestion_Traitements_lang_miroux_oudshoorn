@@ -23,10 +23,10 @@
         <td>{{traitement.consultation.id}}</td>
         <td>	{{traitement.duree}}</td>
         <td> {{ traitement.datedeb| date('d-m-Y')}}</td>
+		<td><a href="{{path('traitement',{id:traitement.id})}}"><button type="button">Modifier</a></td>
 
     
     </tr>
-		<a href="{{path('traitement',{id:traitement.id})}}"><button type="button">Modifier</a>
 
 {% else %}
     Pas de patients
