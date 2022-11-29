@@ -19,17 +19,19 @@
 			<td>Posologie</td>
 		</tr>
 	</thead>
-    <tr>
+    
         {% for indication in indications %}
+        <tr>
             <td>{{indication.traitement.consultation.patient.nom}}</td>
             <td>{{indication.traitement.consultation.patient.prenom}}</td>
             <td>{{indication.medicament.libelle}}</td>
             <td>{{indication.traitement.dateDeb|date('d-m-Y')}}</td>
             <td>{{indication.traitement.duree}}</td>
             <td>{{indication.posologie}}</td>
+            </tr>
         {% else %}
 
         {% endfor %}
-    </tr>
+    
 </table>
 {% endblock %}
