@@ -8,13 +8,29 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<table>
+    <thead>
+	        <th>ID traitement</th>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/sio2022/Documents/Symfony/Partiel/PARTIEL_Gestion_Traitements_lang_miroux_oudshoorn/partiel/src/Controller/TraitementController.php'|file_link(0) }}">src/Controller/TraitementController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/sio2022/Documents/Symfony/Partiel/PARTIEL_Gestion_Traitements_lang_miroux_oudshoorn/partiel/templates/traitement/index.html.twig'|file_link(0) }}">templates/traitement/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <th>Idconsultation</th>
+        <th>Duree</th>
+        <th>Date début</th>
+       
+    </thead>
+	 <tbody>
+{% for traitement in traitements %}    <tr>
+  <td>{{traitement.id}}</td>
+        <td>{{traitement.consultation.id}}</td>
+        <td>	{{traitement.duree}}</td>
+        <td> {{ traitement.datedeb| date('d-m-Y')}}</td>
+
+    
+    </tr>
+		<a href="{{path('traitement',{id:traitement.id})}}"><button type="button">Modifier</a>
+
+{% else %}
+    Pas de patients
+{% endfor %}
+    </tbody>
+</table>
 {% endblock %}
