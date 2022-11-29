@@ -28,9 +28,20 @@
             <td>{{indication.traitement.dateDeb|date('d-m-Y')}}</td>
             <td>{{indication.traitement.duree}}</td>
             <td>{{indication.posologie}}</td>
-            </tr>
+        </tr>
         {% else %}
-
+        {% if indications is defined and indications != null %}
+        <tr>
+            <td>{{indications.traitement.consultation.patient.nom}}</td>
+            <td>{{indications.traitement.consultation.patient.prenom}}</td>
+            <td>{{indications.medicament.libelle}}</td>
+            <td>{{indications.traitement.dateDeb|date('d-m-Y')}}</td>
+            <td>{{indications.traitement.duree}}</td>
+            <td>{{indications.posologie}}</td>
+        </tr>
+        {% else %}
+            Pas d'indication
+        {% endif %}
         {% endfor %}
     
 </table>

@@ -20,4 +20,15 @@ class IndicationController extends AbstractController
             'indications'     => $lesIndications,
         ]);
     }
+
+    #[Route('/indication/{id}', name: 'uneIndication')]
+    public function uneIndication(ManagerRegistry $doctrine, $id): Response
+    {
+        $repository=$doctrine->getRepository(Indication::class);
+        $lesIndications=$repository->find($id);
+        return $this->render('indication/index.html.twig', [
+            'controller_name' => 'IndicationController',
+            'indications'     => $lesIndications,
+        ]);
+    }
 }
