@@ -28,6 +28,7 @@
             <td>{{indication.traitement.dateDeb|date('d-m-Y')}}</td>
             <td>{{indication.traitement.duree}}</td>
             <td>{{indication.posologie}}</td>
+            <td><a href="{{path('indication',{id:indication.id})}}"><button type="button">Afficher</button></td>
         </tr>
         {% else %}
         {% if indications is defined and indications != null %}
