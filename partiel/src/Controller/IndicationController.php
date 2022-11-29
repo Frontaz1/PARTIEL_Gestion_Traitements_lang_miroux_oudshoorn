@@ -10,8 +10,8 @@ use App\Entity\Indication;
 
 class IndicationController extends AbstractController
 {
-    #[Route('/indication', name: 'app_indication')]
-    public function indication(ManagerRegistry $doctrine): Response
+    #[Route('/indication', name: 'indications')]
+    public function getIndications(ManagerRegistry $doctrine): Response
     {
         $repository=$doctrine->getRepository(Indication::class);
         $lesIndications=$repository->findAll();
@@ -21,8 +21,8 @@ class IndicationController extends AbstractController
         ]);
     }
 
-    #[Route('/indication/{id}', name: 'uneIndication')]
-    public function uneIndication(ManagerRegistry $doctrine, $id): Response
+    #[Route('/indication/{id}', name: 'indication')]
+    public function getUneIndication(ManagerRegistry $doctrine, $id): Response
     {
         $repository=$doctrine->getRepository(Indication::class);
         $lesIndications=$repository->find($id);
