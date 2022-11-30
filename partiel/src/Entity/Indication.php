@@ -16,11 +16,11 @@ class Indication
     #[ORM\Column(length: 50)]
     private ?string $posologie = null;
 
-    #[ORM\OneToOne(inversedBy: 'indication', cascade: ['persist', 'remove'])]
-    private ?Traitement $traitement = null;
-
     #[ORM\ManyToOne(inversedBy: 'indication')]
     private ?Medicament $medicament = null;
+
+    #[ORM\ManyToOne(inversedBy: 'indication')]
+    private ?Traitement $traitement = null;
 
     public function getId(): ?int
     {
@@ -39,18 +39,6 @@ class Indication
         return $this;
     }
 
-    public function getTraitement(): ?Traitement
-    {
-        return $this->traitement;
-    }
-
-    public function setTraitement(?Traitement $traitement): self
-    {
-        $this->traitement = $traitement;
-
-        return $this;
-    }
-
     public function getMedicament(): ?Medicament
     {
         return $this->medicament;
@@ -59,6 +47,18 @@ class Indication
     public function setMedicament(?Medicament $medicament): self
     {
         $this->medicament = $medicament;
+
+        return $this;
+    }
+
+    public function getTraitement(): ?Traitement
+    {
+        return $this->traitement;
+    }
+
+    public function setTraitement(?Traitement $traitement): self
+    {
+        $this->traitement = $traitement;
 
         return $this;
     }

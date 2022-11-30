@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TraitementRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,8 +25,13 @@ class Traitement
     #[ORM\ManyToOne(inversedBy: 'traitements')]
     private ?Consultation $consultation = null;
 
-    #[ORM\OneToOne(mappedBy: 'traitement', cascade: ['persist', 'remove'])]
-    private ?Indication $indication = null;
+    #[ORM\OneToMany(mappedBy: 'traitement', targetEntity: Indication::class)]
+    private Collection $indication;
+
+    public function __construct()
+    {
+        $this->indication = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -67,24 +74,32 @@ class Traitement
         return $this;
     }
 
-    public function getIndication(): ?Indication
+    /**
+     * @return Collection<int, Indication>
+     */
+    public function getIndication(): Collection
     {
         return $this->indication;
     }
 
-    public function setIndication(?Indication $indication): self
+    public function addIndication(Indication $indication): self
     {
-        // unset the owning side of the relation if necessary
-        if ($indication === null && $this->indication !== null) {
-            $this->indication->setTraitement(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($indication !== null && $indication->getTraitement() !== $this) {
+        if (!$this->indication->contains($indication)) {
+            $this->indication->add($indication);
             $indication->setTraitement($this);
         }
 
-        $this->indication = $indication;
+        return $this;
+    }
+
+    public function removeIndication(Indication $indication): self
+    {
+        if ($this->indication->removeElement($indication)) {
+            // set the owning side to null (unless already changed)
+            if ($indication->getTraitement() === $this) {
+                $indication->setTraitement(null);
+            }
+        }
 
         return $this;
     }
