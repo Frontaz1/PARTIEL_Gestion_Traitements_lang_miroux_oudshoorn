@@ -26,8 +26,7 @@ class TraitementController extends AbstractController
         $repository=$doctrine->getRepository(Traitement::class);
         $lesTraitements=$repository->findAll();
         return $this->render('traitement/index.html.twig', [
-            'controller_name' => 'TraitementController',
-
+            'title' => 'LES TRAITEMENTS',
             'traitements' => $lesTraitements,
             
 
@@ -42,9 +41,9 @@ class TraitementController extends AbstractController
         //recup de tous les adherents
         $unTraitement=$repository->find($id);
 
-        return $this->render('traitement/untraitement.html.twig', [
-            
-            'traitement'=>$unTraitement
+        return $this->render('traitement/index.html.twig', [
+            'title'=>'Le traitement',
+            'traitements'=>$unTraitement
         ]);
     }
 }

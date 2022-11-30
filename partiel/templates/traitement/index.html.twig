@@ -10,8 +10,7 @@
 
 <table>
     <thead>
-	        <th>ID traitement</th>
-
+	    <th>ID traitement</th>
         <th>Idconsultation</th>
         <th>Duree</th>
         <th>Date début</th>
@@ -19,18 +18,50 @@
     </thead>
 	 <tbody>
 {% for traitement in traitements %}    <tr>
-  <td>{{traitement.id}}</td>
+        <td>{{traitement.id}}</td>
         <td>{{traitement.consultation.id}}</td>
-        <td>	{{traitement.duree}}</td>
+        <td>{{traitement.duree}}</td>
         <td> {{ traitement.datedeb| date('d-m-Y')}}</td>
 		<td><a href="{{path('traitement',{id:traitement.id})}}"><button type="button">Modifier</a></td>
-
-    
     </tr>
-
 {% else %}
     Pas de patients
 {% endfor %}
     </tbody>
+</table>
+
+
+<h1> {{ title }}</h1>
+<table>
+
+   <thead>
+    <th>ID traitement</th>
+    <th>Idconsultation</th>
+    <th>Duree</th>
+    <th>Date début</th>
+   </thead>
+    <tbody>
+    {% for traitement in traitements %}
+    
+        <tr>
+        <td>{{traitement.id}}</td>
+        <td>{{traitement.consultation.id}}</td>
+        <td>{{traitement.duree}}</td>
+        <td> {{ traitement.datedeb| date('d-m-Y')}}</td>
+        <td><a href="{{ path('traitement', {id:traitement.id}) }}"><button type="button">Afficher</button></td>
+        </tr>
+        {% else %}
+        {% if traitements is defined and traitements != null %}
+        <tr>
+        <td>{{traitements.id}}</td>
+        <td>{{traitements.consultation.id}}</td>
+        <td>{{traitements.duree}}</td>
+        <td> {{ traitements.datedeb| date('d-m-Y')}}</td>
+        </tr>
+        {% else %}
+         <p> Pas de Traitements </p>
+        {% endif %}
+    {% endfor %}
+</tbody>
 </table>
 {% endblock %}

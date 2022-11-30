@@ -1,0 +1,23 @@
+
+.nav_links{
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    
+}
+.nav_links li{
+    display: inline-block;
+    padding: 0px 20px;
+    
+}
+.nav_links li a {
+    transition: all 0.3s ease 0s;
+}
+.nav_links li a:hover{
+    color: rgb(160, 23, 53);
+}
+
+table,
+  td {
+      border: 1px solid #333;
+  }
