@@ -79,7 +79,7 @@ class ConsultationController extends AbstractController
 
     //SUPPRIMER UNE CONSULTATION
     #[Route('/supprimer_consultation/{id}', name: 'supprimer_consultation')]
-    public function suppression(ManagerRegistry $doctrine, $id): Response
+    public function supprimerConsultation(ManagerRegistry $doctrine, $id): Response
     {
         $repository=$doctrine->getRepository(Consultation::class);
         $consultation=$repository->find($id);

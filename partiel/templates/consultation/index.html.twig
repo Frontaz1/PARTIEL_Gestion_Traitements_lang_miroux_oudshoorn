@@ -18,7 +18,7 @@
         <td>{{ consult.date | date("d-m-Y")}}</td>
         <td><a href="{{ path('consultation', {id:consult.id}) }}"><button type="button">Afficher</button></td>
         <td><a href="{{ path('modifier_consultation', {id:consult.id}) }}"><button type="button">Modifier</button></td>
-        <td><a href="{{ path('modifier_consultation', {id:consult.id}) }}"><button type="button" onclick="return confirm('Souhaitez-vous supprimer ?')">Supprimer</button></td>
+        <td><a href="{{ path('supprimer_consultation', {id:consult.id}) }}"><button type="button" onclick="return confirm('Souhaitez-vous supprimer ?')">Supprimer</button></td>
         </tr>
         {% else %}
         {% if consultations is defined and consultations != null %}

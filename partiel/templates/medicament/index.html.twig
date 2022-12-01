@@ -12,20 +12,40 @@
 
     {% for medoc in medicaments %}
         <tr>
-        <td>{{ medoc.id }}</td>
-        <td>{{ medoc.libelle }}</td>
-        <td><a href="{{ path('medicament', {id:medoc.id}) }}"><button type="button">Afficher</button></td>
+            <td>{{ medoc.id }}</td>
+            <td>{{ medoc.libelle }}</td>
+            <td>
+                <a href="{{ path('medicament', {id:medoc.id}) }}"><button type="button">Afficher</button></a>
+            </td>
+            <td>
+                <a href="{{ path('modifier_medicament', {id:medoc.id}) }}"><button type="button">Modifier</button></a>
+            </td>
+            <td>
+                <a href="{{ path('supprimer_medicament', {id:medoc.id}) }}"><button type="button" onclick="return confirm('Souhaitez-vous supprimer ?')">Supprimer</button></a>
+            </td>
         </tr>
-        {% else %}
+    {% else %}
         {% if medicaments is defined and medicaments != null %}
-        <tr>
-        <td>{{ medicaments.id }}</td>
-        <td>{{ medicaments.libelle }}</td>
-        </tr>
+            <tr>
+                <td>{{ medicaments.id }}</td>
+                <td>{{ medicaments.libelle }}</td>
+                <tr><th>Patients</th></tr>
+                {% for indication in medicaments.indication %}
+                    {% if indication.traitement.dateDeb|date('Y') is same as("now"|date("Y")) %}
+                        <tr><td>{{ indication.traitement.consultation.patient.nom }}
+                        {{ indication.traitement.consultation.patient.prenom }}</td></tr>
+                    {% else %}
+                        <p>Pas de patient</p>
+                    {% endif %}
+                {% endfor %}
+
+            </tr>
         {% else %}
-         <p> Pas de médicaments </p>
+            <p> Pas de médicaments </p>
         {% endif %}
     {% endfor %}
 
 </table>
+
+    <a href="{{ path('ajout_medicament') }}"><button type="button">Ajouter</button></a>
 {% endblock %}
