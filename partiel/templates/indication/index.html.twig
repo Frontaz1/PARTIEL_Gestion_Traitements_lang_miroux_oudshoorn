@@ -3,10 +3,13 @@
 {% block title %}Hello IndicationController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<h1> {{ title }}</h1>
+
+<div class="btn">
+    <a href="{{path('formulaireIndication')}}"><button type="button">Ajouter indication</button></a>
+    <a href="{{path('lesPatients')}}"><button type="button">Afficher les médicaments de chaque patient</button></a>
+    <a href="{{path('indications')}}"><button type="button">Retour</button></a>
+</div>
 
 <table>
     <thead>
@@ -48,6 +51,5 @@
         {% endfor %}
     
 </table>
-<a href="{{path('formulaireIndication')}}"><button type="button">Ajouter une indication</button></a>
-<a href="{{path('lesPatients')}}"><button type="button">Afficher les médicaments de chaque patient</button></a>
+
 {% endblock %}

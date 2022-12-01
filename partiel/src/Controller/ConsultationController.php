@@ -50,7 +50,7 @@ class ConsultationController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('consultations');
         }
-        return $this->render('consultation/formulaire.html.twig', array(
+        return $this->render('base/formulaire.html.twig', array(
             'form' => $form->createView(),
             'title' => 'Ajouter une consultation'
         ));
@@ -71,7 +71,7 @@ class ConsultationController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('consultations');
         }
-        return $this->render('consultation/formulaire.html.twig', array(
+        return $this->render('base/formulaire.html.twig', array(
             'form' => $form->createView(),
             'title' => 'Modifier une consultation'
         ));

@@ -5,6 +5,11 @@
 {% block body %}
 
     <h1> {{ title }}</h1>
+    
+    <div class="btn">
+        <a href="{{ path('ajout_medicament') }}" class="ajout"><button type="button">Ajouter médicament</button></a>
+        <a href="{{ path('medicaments') }}" class="ajout"><button type="button">Retour</button></a>
+    </div>
 
 <table>
     <th>ID</th>
@@ -47,5 +52,4 @@
 
 </table>
 
-    <a href="{{ path('ajout_medicament') }}"><button type="button">Ajouter</button></a>
 {% endblock %}

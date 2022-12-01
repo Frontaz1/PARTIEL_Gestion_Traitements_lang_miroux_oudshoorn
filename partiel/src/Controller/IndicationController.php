@@ -13,13 +13,13 @@ use App\Form\IndicationType;
 
 class IndicationController extends AbstractController
 {
-    #[Route('/indication', name: 'indications')]
+    #[Route('/indications', name: 'indications')]
     public function getIndications(ManagerRegistry $doctrine): Response
     {
         $repository=$doctrine->getRepository(Indication::class);
         $lesIndications=$repository->findAll();
         return $this->render('indication/index.html.twig', [
-            'controller_name' => 'IndicationController',
+            'title' => 'Liste des indications',
             'indications'     => $lesIndications,
         ]);
     }
@@ -29,8 +29,8 @@ class IndicationController extends AbstractController
     {
         $repository=$doctrine->getRepository(Indication::class);
         $lesIndications=$repository->find($id);
-        return $this->render('base/index.html.twig', [
-            'controller_name' => 'IndicationController',
+        return $this->render('indication/index.html.twig', [
+            'title' => 'L\'indication',
             'indications'     => $lesIndications,
         ]);
     }

@@ -6,6 +6,11 @@
 
     <h1> {{ title }}</h1>
 
+    <div class="btn">
+        <a href="{{ path('ajout_consultation') }}"><button type="button">Ajouter consultation</button></a>
+        <a href="{{ path('consultations') }}"><button type="button">Retour</button></a>
+    </div>
+
     <table>
     <th>ID</th>
     <th>Patient</th>
@@ -33,7 +38,5 @@
     {% endfor %}
 
     </table>
-
-    <a href="{{ path('ajout_consultation') }}"><button type="button">Ajouter</button></a>
 
 {% endblock %}
