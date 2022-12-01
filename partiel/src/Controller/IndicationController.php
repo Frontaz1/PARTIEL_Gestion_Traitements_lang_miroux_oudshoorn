@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Indication;
+use App\Entity\Patient;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\IndicationType;
 
@@ -73,7 +74,7 @@ class IndicationController extends AbstractController
             return $this->redirectToRoute('indications');
         }
         return $this->render('base/formulaire.html.twig', [
-            'controller_name' => 'Modification d\'un adhérent',
+            'controller_name' => 'Modification d\'une indication',
             'form'            => $form->createView(),
         ]);
     }
@@ -89,5 +90,16 @@ class IndicationController extends AbstractController
         }
         $em->flush();
         return $this->redirectToRoute('indications');;
+    }
+
+    #[Route('/lesPatients', name: 'lesPatients')]
+    public function lesPatients(ManagerRegistry $doctrine): Response
+    {
+        $repository=$doctrine->getRepository(Patient::class);
+        $lesPatients=$repository->findAll();
+        return $this->render('indication/patients.html.twig', [
+            'controller_name' => 'Les patients',
+            'patients'     => $lesPatients,
+        ]);
     }
 }
