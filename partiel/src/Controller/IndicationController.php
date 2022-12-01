@@ -28,7 +28,7 @@ class IndicationController extends AbstractController
     {
         $repository=$doctrine->getRepository(Indication::class);
         $lesIndications=$repository->find($id);
-        return $this->render('indication/index.html.twig', [
+        return $this->render('base/index.html.twig', [
             'controller_name' => 'IndicationController',
             'indications'     => $lesIndications,
         ]);
@@ -50,7 +50,7 @@ class IndicationController extends AbstractController
             // redirection vers la liste des indications
             return $this->redirectToRoute('indications');
         }
-        return $this->render('indication/formulaire.html.twig', [
+        return $this->render('base/formulaire.html.twig', [
             'controller_name' => 'Création d\'une indication',
             'form'            => $form->createView(),
         ]);
@@ -72,7 +72,7 @@ class IndicationController extends AbstractController
             // redirection vers la liste des adhérents
             return $this->redirectToRoute('indications');
         }
-        return $this->render('indication/formulaire.html.twig', [
+        return $this->render('base/formulaire.html.twig', [
             'controller_name' => 'Modification d\'un adhérent',
             'form'            => $form->createView(),
         ]);
