@@ -29,6 +29,8 @@
             <td>{{indication.traitement.duree}}</td>
             <td>{{indication.posologie}}</td>
             <td><a href="{{path('indication',{id:indication.id})}}"><button type="button">Afficher</button></td>
+            <td><a href="{{path('modifIndication',{id:indication.id})}}"><button type="button">Modifier</button></a></td>
+            <td><a href="{{path('supprIndication',{id:indication.id})}}" onclick="return confirm('Voulez-vous vraiment supprimer l'indication?')"><button type="button">Supprimer</button></a></td>	
         </tr>
         {% else %}
         {% if indications is defined and indications != null %}
@@ -46,4 +48,5 @@
         {% endfor %}
     
 </table>
+<a href="{{path('formulaireIndication')}}"><button type="button">Ajouter une indication</button></a>
 {% endblock %}
