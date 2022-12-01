@@ -8,27 +8,7 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<table>
-    <thead>
-	    <th>ID traitement</th>
-        <th>Idconsultation</th>
-        <th>Duree</th>
-        <th>Date début</th>
-       
-    </thead>
-	 <tbody>
-{% for traitement in traitements %}    <tr>
-        <td>{{traitement.id}}</td>
-        <td>{{traitement.consultation.id}}</td>
-        <td>{{traitement.duree}}</td>
-        <td> {{ traitement.datedeb| date('d-m-Y')}}</td>
-		<td><a href="{{path('traitement',{id:traitement.id})}}"><button type="button">Modifier</a></td>
-    </tr>
-{% else %}
-    Pas de patients
-{% endfor %}
-    </tbody>
-</table>
+
 
 
 <h1> {{ title }}</h1>
