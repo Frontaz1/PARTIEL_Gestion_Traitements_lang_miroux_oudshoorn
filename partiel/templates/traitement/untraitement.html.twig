@@ -5,9 +5,42 @@
 
 {% block body %}
 
+<table>
 
+   <thead>
+    <th>ID traitement</th>
+    <th>Duree</th>
+    <th>Date début</th>
+    <th>Patient</th>
+    <th>Medicament</th>
 
+   </thead>
+    <tbody>
+    
+    {% for traitement in traitements %}
+        {% for indication in traitement.indication %} 
 
+                {% set traitementss= indication.medicament.libelle %}
 
-    Le traitement numéro : {{traitement.id}} => {{traitement.consultation.id}}{{traitement.duree}}-{{ traitement.datedeb| date('d-m-Y')}}
+           {% if indication.medicament.libelle == traitementss  %}
+<tr>
+        <td>{{traitement.consultation.id}}</td>
+        <td>{{traitement.duree}}</td>
+        <td> {{traitement.datedeb| date('d-m-Y')}}</td>
+        <td>{{traitement.consultation.patient.nom}}</td>
+        <td> {{indication.medicament.libelle}}</td>
+
+        {% endif %}
+        {% else %}
+
+        {% endfor %}
+        {% endfor %}
+
 {% endblock %}
+
+
+
+
+
+
+   

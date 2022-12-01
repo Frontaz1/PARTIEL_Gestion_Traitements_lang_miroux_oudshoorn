@@ -36,6 +36,19 @@ class TraitementController extends AbstractController
         ]);
     }
 
+    #[Route('/traitementz', name: 'traitementstri')]
+    public function getTraitement(ManagerRegistry $doctrine): Response
+    {
+        $repository=$doctrine->getRepository(Traitement::class);
+        $lesTraitements=$repository->findAll();
+        return $this->render('traitement/untraitement.html.twig', [
+            'title' => 'LES TRAITEMENTS',
+            'traitements' => $lesTraitements,
+            
+
+        ]);
+    }
+
     #[Route('/traitement/{id}', name: 'traitement')]
     public function getUnTraitement(ManagerRegistry $doctrine, $id): Response
     {
@@ -49,7 +62,20 @@ class TraitementController extends AbstractController
             'traitements'=>$unTraitement
         ]);
     }
+    
+    #[Route('/traitementz/{id}', name: 'traitementMedoc')]
+    public function getUnMedoc(ManagerRegistry $doctrine, $id): Response
+    {
+        //accès au répository de la classe adherent
+        $repository=$doctrine->getRepository(Traitement::class);
+        $unTraitement=$repository->find($id);
 
+        return $this->render('traitement/untraitement.html.twig', [
+            'medoc'=>$unTraitement,
+            'title'=>'Le traitement',
+            'traitements'=>$unTraitement
+        ]);
+    }
     #[Route('/ajout_traitement', name: 'add_traitement')]
     public function ajouter_traitement(ManagerRegistry $doctrine, Request $request): Response
     {
