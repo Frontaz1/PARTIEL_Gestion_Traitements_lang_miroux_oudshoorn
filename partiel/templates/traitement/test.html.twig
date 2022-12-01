@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+<table>
+    <thead>
+    <th>Medicament</th>
+    <th>Traitement le possedant</th>
+    
+   </thead>
+ 
+    {% for medoc in medicaments %}
+            <tr>
+
+   <td> {{medoc.libelle}} </td>
+<td>
+      {% for indicationz in medoc.indication %}       
+      <td> {{indicationz.traitement.id}}
+       </td>
+      {% endfor %}
+ </td>
+      
+ </tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

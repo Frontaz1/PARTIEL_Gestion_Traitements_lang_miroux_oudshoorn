@@ -10,7 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 //AJOUTER LE USE APP FORM DE FORM ADHERENT
 use App\Form\TraitementType;
-
+use App\Entity\Medicament;
 
 class TraitementController extends AbstractController
 {
@@ -136,5 +136,18 @@ class TraitementController extends AbstractController
          $em->flush();
          
          return $this->redirectToRoute('traitements');
+    }
+
+    #[Route('/test', name: 'test')]
+    public function getTest(ManagerRegistry $doctrine): Response
+    {
+        $repository=$doctrine->getRepository(Medicament::class);
+        $lesMedicaments=$repository->findAll();
+        return $this->render('traitement/test.html.twig', [
+            'title' => 'LES TRAITEMENTS',
+            'medicaments' => $lesMedicaments,
+            
+
+        ]);
     }
 }
