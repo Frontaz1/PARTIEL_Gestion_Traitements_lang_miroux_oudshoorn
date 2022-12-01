@@ -27,7 +27,7 @@
                 {% for traitements in consultations.traitements %}
                 </tr>
                 <tr>
-                <td></td><td></td>
+                <td colspan=2></td>
                 <td>{{ traitements.dateDeb|date('d-m-Y')}}</td>
                     {% for indication in traitements.indication %}
                         {% set test = test|merge([indication.medicament.libelle]) %}
