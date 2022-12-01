@@ -52,7 +52,7 @@ class IndicationController extends AbstractController
             return $this->redirectToRoute('indications');
         }
         return $this->render('base/formulaire.html.twig', [
-            'controller_name' => 'Création d\'une indication',
+            'title' => 'Création d\'une indication',
             'form'            => $form->createView(),
         ]);
     }
@@ -74,7 +74,7 @@ class IndicationController extends AbstractController
             return $this->redirectToRoute('indications');
         }
         return $this->render('base/formulaire.html.twig', [
-            'controller_name' => 'Modification d\'une indication',
+            'title' => 'Modification d\'une indication',
             'form'            => $form->createView(),
         ]);
     }
@@ -98,7 +98,7 @@ class IndicationController extends AbstractController
         $repository=$doctrine->getRepository(Patient::class);
         $lesPatients=$repository->findAll();
         return $this->render('indication/patients.html.twig', [
-            'controller_name' => 'Les patients',
+            'title' => 'Les patients',
             'patients'     => $lesPatients,
         ]);
     }

@@ -36,6 +36,7 @@ table {
     border-collapse: collapse;
     margin: auto;
     font-size: 15px;
+    border: 1px solid #333;
 }
 
 td, th{
@@ -57,7 +58,10 @@ h1 {
     margin-bottom: 30px;
 }
 
-/* CSS */
+form {
+    margin: 0 auto;
+}
+
 button {
   align-items: center;
   background-color: #FCFCFD;

@@ -50,7 +50,7 @@ class MedicamentController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('medicaments');
         }
-        return $this->render('medicament/formulaire.html.twig', array(
+        return $this->render('base/formulaire.html.twig', array(
             'form' => $form->createView(),
             'title' => 'Ajouter un médicament'
         ));
@@ -71,7 +71,7 @@ class MedicamentController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('medicaments');
         }
-        return $this->render('medicament/formulaire.html.twig', array(
+        return $this->render('base/formulaire.html.twig', array(
             'form' => $form->createView(),
             'title' => 'Modifier un médicament'
         ));

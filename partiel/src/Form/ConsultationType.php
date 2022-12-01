@@ -18,7 +18,9 @@ class ConsultationType extends AbstractType
         $builder
             ->add('date', DateType::class, array('label' => 'Date de consultation :',
                                                 'format' => 'dd MM yyyy',
-                                                'years' => range(date('Y'), date('Y')+2)))
+                                                'years' => range(date('Y'), date('Y')+2),
+                                                'months' => range(date('m'), 12),
+                                                'days' => range(date('d'), 31)))
             ->add('patient', EntityType::class, array('class' => Patient::class,
                                                       'choice_label' => 'nom'))
             ->add('save', SubmitType::class, array('label' => 'Enregistrer'))
