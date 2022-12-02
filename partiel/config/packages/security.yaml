@@ -35,7 +35,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^register, roles : ROLE_ADMIN }
+        - { path: ^/medicaments,roles : [ROLE_PHARMACIEN,ROLE_MEDECIN]}
+        - { path: ^/register, roles : ROLE_ADMIN }
         - { path: ^/traitements,roles : ROLE_MEDECIN}
         - { path: ^/indications,roles : ROLE_MEDECIN}
         - { path: ^/indication,roles : ROLE_MEDECIN}
@@ -51,9 +52,8 @@ security:
         - { path: ^/ajout_medicament,roles : ROLE_MEDECIN}
         - { path: ^/modifier_medicament,roles : ROLE_MEDECIN}
         - { path: ^/supprimer_medicament,roles : ROLE_MEDECIN}
-       
         - { path: ^/medicaments,roles : ROLE_PHARMACIEN}
-        - { path: ^/medicament,roles : PHARMARCIEN}
+        - { path: ^/medicament,roles : ROLE_PHARMACIEN}
         - { path: ^/ajout_medicament,roles : ROLE_PHARMACIEN}
         - { path: ^/modifier_medicament,roles : ROLE_PHARMACIEN}
         - { path: ^/supprimer_medicament,roles : ROLE_PHARMACIEN}
@@ -65,11 +65,9 @@ security:
         - { path: ^/modifier_consultation,roles : ROLE_MEDECIN}
         - { path: ^/supprimer_consultation,roles : ROLE_MEDECIN}
 
-        - { path: ^/effets/secondaires,roles : ROLE_PHARMACIEN}
-        - { path: ^/effet/secondaire,roles : ROLE_PHARMACIEN}
-        - { path: ^/ajout_effet,roles : ROLE_PHARMACIEN}
-        - { path: ^/modifier/effet,roles : ROLE_PHARMACIEN}
-        - { path: ^/supprimer/effet,roles : ROLE_PHARMACIEN}
+     
+
+
 
         
 

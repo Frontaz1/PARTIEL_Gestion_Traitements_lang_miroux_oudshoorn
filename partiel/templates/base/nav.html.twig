@@ -24,7 +24,7 @@
 		
 		
 	</ul>
-
+<br>
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 Connecté en tant que {{ app.user.email }}
 <a href="{{ path('app_logout') }}"> logout </a>
