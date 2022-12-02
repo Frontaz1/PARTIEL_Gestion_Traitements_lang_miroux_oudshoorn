@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EffetSecondaireController!{% endblock %}
+
+{% block body %}
+<h1> {{ title }}</h1>
+    
+    <div class="btn">
+        <a href="{{ path('ajout_effet') }}" class="ajout"><button type="button">Ajouter</button></a>
+        <a href="{{ path('effets/secondaires') }}" class="ajout"><button type="button">Retour</button></a>
+    </div>
+
+<table>
+    <th>ID</th>
+    <th>Description</th>
+
+    {% for effet in effetssnd %}
+        <tr>
+            <td>{{ effet.id }}</td>
+            <td>{{ effet.description }}</td>
+            <td>
+                <a href="{{ path('effet/secondaire', {id:effet.id}) }}"><button type="button">Afficher</button></a>
+            </td>
+            <td>
+                <a href="{{ path('modifier/effet', {id:effet.id}) }}"><button type="button">Modifier</button></a>
+            </td>
+            <td>
+                <a href="{{ path('supprimer/effet', {id:effet.id}) }}"><button type="button">Supprimer</button></a>
+            </td>
+        </tr>
+    {% else %}
+        {% if effetssnd is defined and effetssnd != null %}
+            <tr>
+                <td>{{ effetssnd.id }}</td>
+                <td>{{ effetssnd.description }}</td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

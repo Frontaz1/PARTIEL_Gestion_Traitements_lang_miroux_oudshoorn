@@ -58,7 +58,7 @@ class MedicamentController extends AbstractController
 
     //MODIFIER UNE CONSULTATION
     #[Route('/modifier_medicament/{id}', name: 'modifier_medicament')]
-    public function modifierConsultation(ManagerRegistry $doctrine, Request $request, $id): Response
+    public function modifierMedicament(ManagerRegistry $doctrine, Request $request, $id): Response
     {
         $repository=$doctrine->getRepository(Medicament::class);
         $em = $doctrine->getManager();
