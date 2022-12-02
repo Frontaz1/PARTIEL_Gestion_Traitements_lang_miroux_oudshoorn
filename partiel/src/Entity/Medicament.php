@@ -21,9 +21,13 @@ class Medicament
     #[ORM\OneToMany(mappedBy: 'medicament', targetEntity: Indication::class)]
     private Collection $indication;
 
+    #[ORM\ManyToMany(targetEntity: EffetSnd::class, mappedBy: 'medicaments')]
+    private Collection $effetSnds;
+
     public function __construct()
     {
         $this->indication = new ArrayCollection();
+        $this->effetSnds = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -68,6 +72,33 @@ class Medicament
             if ($indication->getMedicament() === $this) {
                 $indication->setMedicament(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EffetSnd>
+     */
+    public function getEffetSnds(): Collection
+    {
+        return $this->effetSnds;
+    }
+
+    public function addEffetSnd(EffetSnd $effetSnd): self
+    {
+        if (!$this->effetSnds->contains($effetSnd)) {
+            $this->effetSnds->add($effetSnd);
+            $effetSnd->addMedicament($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEffetSnd(EffetSnd $effetSnd): self
+    {
+        if ($this->effetSnds->removeElement($effetSnd)) {
+            $effetSnd->removeMedicament($this);
         }
 
         return $this;
