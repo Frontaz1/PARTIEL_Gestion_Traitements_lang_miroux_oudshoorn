@@ -57,7 +57,10 @@ security:
         - { path: ^/ajout_medicament,roles : ROLE_PHARMACIEN}
         - { path: ^/modifier_medicament,roles : ROLE_PHARMACIEN}
         - { path: ^/supprimer_medicament,roles : ROLE_PHARMACIEN}
-
+        
+        - { path: ^/effets/secondaires,roles : ROLE_PHARMACIEN}
+        - { path: ^/effet/secondaire,roles : ROLE_PHARMACIEN}
+       
       
         - { path: ^/consultations,roles : ROLE_MEDECIN}
         - { path: ^/consultation,roles : ROLE_MEDECIN}
