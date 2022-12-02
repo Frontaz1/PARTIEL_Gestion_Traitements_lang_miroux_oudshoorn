@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PatientController!{% endblock %}
+
+{% block body %}
+
+    <h1>{{ title }}</h1>
+
+    <div class="btn">
+        <a href="{{ path('patients') }}" class="ajout"><button type="button">Retour</button></a>
+    </div>
+
+    <table>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Date de Naissance </th>
+        <th>Téléphone</th>
+
+    {% for patient in patients %}
+        <tr>
+            <td>{{ patient.id }}</td>
+            <td>{{ patient.nom }}</td>
+            <td>{{ patient.prenom }}</td>
+            <td>{{ patient.dateNaissance|date('d-M-Y') }}</td>
+            <td>{{ patient.telephone }}</td>
+            <td>
+                <a href="{{ path('patient', {id:patient.id}) }}"><button type="button">Afficher</button></a>
+            </td>
+        </tr>
+    {% else %}
+        {% if patients is defined and patients != null %}
+        <tr>
+            <td>{{ patients.id }}</td>
+            <td>{{ patients.nom }}</td>
+            <td>{{ patients.prenom }}</td>
+            <td>{{ patients.dateNaissance|date('d-M-Y') }}</td>
+            <td>{{ patients.telephone }}</td>
+        </tr>
+        <tr><th>Traitements</th>
+            <th>Durée (en min)</th>
+            <th>Posologie</th></tr>
+        {% for consult in patients.consultations %}
+            {% for traitement in consult.traitements %}
+                {% for indication in traitement.indication %}
+                    <tr>
+                        <td>{{ traitement.dateDeb|date('d-M-Y') }}</td>
+                        <td>{{ traitement.duree }}</td>
+                        <td>{{ indication.posologie }}</td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+
+        {% else %}
+            <p>Pas de patient</p>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
