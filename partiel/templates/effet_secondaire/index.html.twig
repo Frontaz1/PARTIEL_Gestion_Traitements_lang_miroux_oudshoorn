@@ -25,7 +25,7 @@
                 <a href="{{ path('modifier/effet', {id:effet.id}) }}"><button type="button">Modifier</button></a>
             </td>
             <td>
-                <a href="{{ path('supprimer/effet', {id:effet.id}) }}"><button type="button">Supprimer</button></a>
+                <a href="{{ path('supprimer/effet', {id:effet.id}) }}"><button type="button" onclick="return confirm('Souhaitez-vous supprimer ?')">Supprimer</button></a>
             </td>
         </tr>
     {% else %}

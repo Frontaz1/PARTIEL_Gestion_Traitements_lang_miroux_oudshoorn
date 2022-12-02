@@ -35,7 +35,7 @@ class EffetSecondaireController extends AbstractController
     }
 
     #[Route('/ajout_effet', name:'ajout_effet')]
-    public function ajoutMedicament(ManagerRegistry $doctrine, Request $request): Response
+    public function ajouEffet(ManagerRegistry $doctrine, Request $request): Response
     {
         $em = $doctrine->getManager();
         $effet = new EffetSnd();
@@ -53,7 +53,7 @@ class EffetSecondaireController extends AbstractController
         ));
     }
 
-    #[Route('/modifier/effet/{id}', name:'modifier/effet')]
+    #[Route('/modifier_effet/{id}', name:'modifier_effet')]
     public function modifEffet(ManagerRegistry $doctrine, Request $request, $id): Response
     {
         $repository=$doctrine->getRepository(EffetSnd::class);
