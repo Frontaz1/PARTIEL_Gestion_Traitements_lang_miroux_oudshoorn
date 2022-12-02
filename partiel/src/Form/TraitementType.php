@@ -20,7 +20,7 @@ class TraitementType extends AbstractType
         $builder
             ->add('duree', TextType::class, array('label'=>'La durée : '))
             ->add('dateDeb',DateType::class,array('label'=>'La date de début du traitement'))
-            ->add('consultation',EntityType::class,array('class'=>Consultation::class,'choice_label'=>'id'))
+            ->add('consultation',EntityType::class,array('class'=>Consultation::class,'choice_label'=>'AffichagePatient'))
             ->add('save', SubmitType::class, array('label' => 'Enregistrer le traitement'))
 
         ;

@@ -88,4 +88,9 @@ class Consultation
 
         return $this;
     }
+
+    public function getAffichagePatient()
+    {
+        return $this->patient->getNom().' '.$this->patient->getPrenom().', date de consultation : '.$this->date->format('d-m-Y');
+    }
 }

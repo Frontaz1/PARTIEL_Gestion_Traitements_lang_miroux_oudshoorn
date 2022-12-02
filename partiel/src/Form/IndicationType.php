@@ -21,9 +21,8 @@ class IndicationType extends AbstractType
         ->add('traitement',
         EntityType::class, 
         array('class'=>Traitement::class, 
-        'choice_label'=>'id', 
+        'choice_label'=>'AffichageTraitement', 
         'label'=>'Traitement : '
-        , 'label_format'=>'DD MM YYYY'
         ))
         ->add('medicament', EntityType::class, array('class'=>Medicament::class, 'choice_label'=>'libelle', 'label'=>'Medicament : '))
         ->add('posologie', TextType::class, array('label'=>'Posologie : '))

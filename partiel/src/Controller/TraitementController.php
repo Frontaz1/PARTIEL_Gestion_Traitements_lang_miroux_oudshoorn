@@ -19,6 +19,7 @@ class TraitementController extends AbstractController
     {
         return $this->render('traitement/index.html.twig', [
             'controller_name' => 'TraitementController',
+            'title' => 'LE TRAITEMENT',
         ]);
     }
 
@@ -94,6 +95,7 @@ class TraitementController extends AbstractController
          }
         return $this->render('base/formulaire.html.twig', array(
             'form' => $form->createView(),
+            'title' => 'AJOUT TRAITEMENT',
         ));
     }
 
@@ -118,6 +120,7 @@ class TraitementController extends AbstractController
             }
             return $this->render('base/formulaire.html.twig', array(
                 'form' => $form->createView(),
+                'title' => 'MODIFICATION TRAITEMENT',
     ));
     }
 

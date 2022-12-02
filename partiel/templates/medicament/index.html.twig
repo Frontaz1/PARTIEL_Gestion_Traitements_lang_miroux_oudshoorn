@@ -14,11 +14,23 @@
 <table>
     <th>ID</th>
     <th>Libellé</th>
+    <th>Effets secondaires<th>
 
     {% for medoc in medicaments %}
         <tr>
             <td>{{ medoc.id }}</td>
             <td>{{ medoc.libelle }}</td>
+            <td>
+            <ul>
+            {% for effets in medoc %}
+                {% for effet in effets %}
+                    <li>{{effet.description}}</li>
+                {% endfor %}
+            {% else %}
+
+            {% endfor %}
+            <ul>
+            </td>
             <td>
                 <a href="{{ path('medicament', {id:medoc.id}) }}"><button type="button">Afficher</button></a>
             </td>

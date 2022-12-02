@@ -103,4 +103,9 @@ class Traitement
 
         return $this;
     }
+
+    public function getAffichageTraitement()
+    {
+        return $this->getConsultation()->getPatient()->getPrenom().' '.$this->getConsultation()->getPatient()->getPrenom().', date début : '.$this->dateDeb->format('d-m-Y').', durée traitement '.$this->getDuree();
+    }
 }
