@@ -38,17 +38,24 @@
             <td>{{ patients.telephone }}</td>
         </tr>
         <tr><th>Traitements</th>
-            <th>Durée (en min)</th>
-            <th>Posologie</th></tr>
+            <th>Durée (en jours)</th>
+            <th>Médicaments et Posologie</th></tr>
         {% for consult in patients.consultations %}
-            {% for traitement in consult.traitements %}
+            {% for traitement in consult.traitements|sort((a, b) => b.dateDeb <=> a.dateDeb) %}
+            <tr>
+                <td>{{ traitement.dateDeb|date('d-M-Y') }}</td>
+                <td>{{ traitement.duree }}</td>
+                <td>
+                <ul>
                 {% for indication in traitement.indication %}
-                    <tr>
-                        <td>{{ traitement.dateDeb|date('d-M-Y') }}</td>
-                        <td>{{ traitement.duree }}</td>
-                        <td>{{ indication.posologie }}</td>
-                    </tr>
+                <li>
+                    {{ indication.medicament.libelle}}
+                    {{ indication.posologie }}
+                </li>
                 {% endfor %}
+                </ul>
+                </td>
+            </tr>
             {% endfor %}
         {% endfor %}
 
