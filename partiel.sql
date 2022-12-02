@@ -40,3 +40,16 @@ INSERT INTO `indication` (`id`, `traitement_id`, `medicament_id`, `posologie`) V
 (4, 4, 9, '1 fois par jour'),
 (5, 5, 6, '1 fois par jour'),
 (6, 6, 10, '4 fois par jour');
+
+INSERT INTO `effet_snd` (`id`, `description`) VALUES
+(1, 'érythème'),
+(2, 'urticaire'),
+(3, 'rash cutané'),
+(4, 'hypotension');
+
+INSERT INTO `effet_snd_medicament` (`effet_snd_id`, `medicament_id`) VALUES
+(1, 1),
+(2, 1),
+(2, 2),
+(3, 1),
+(4, 2);
