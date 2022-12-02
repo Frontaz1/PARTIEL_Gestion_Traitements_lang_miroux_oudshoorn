@@ -22,10 +22,8 @@
             <td>{{ medoc.libelle }}</td>
             <td>
             <ul>
-            {% for effets in medoc %}
-                {% for effet in effets %}
-                    <li>{{effet.description}}</li>
-                {% endfor %}
+            {% for effets in medoc.getEffetSnds() %}
+                <li>{{effets.description}}</li>
             {% else %}
 
             {% endfor %}
@@ -46,6 +44,15 @@
             <tr>
                 <td>{{ medicaments.id }}</td>
                 <td>{{ medicaments.libelle }}</td>
+                <td>
+                <ul>
+                {% for effets in medicaments.getEffetSnds() %}
+                    <li>{{effets.description}}</li>
+                {% else %}
+
+                {% endfor %}
+                </ul>
+                </td>
                 <tr><th>Patients</th></tr>
                 {% for indication in medicaments.indication %}
                     {% if indication.traitement.dateDeb|date('Y') is same as("now"|date("Y")) %}
