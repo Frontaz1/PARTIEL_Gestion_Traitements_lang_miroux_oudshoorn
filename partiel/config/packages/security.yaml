@@ -56,7 +56,22 @@ security:
         - { path: ^/medicament,roles : PHARMARCIEN}
         - { path: ^/ajout_medicament,roles : ROLE_PHARMACIEN}
         - { path: ^/modifier_medicament,roles : ROLE_PHARMACIEN}
-        - { path: ^/supprimer_medicament,roles : ROLE_MEDECIN}
+        - { path: ^/supprimer_medicament,roles : ROLE_PHARMACIEN}
+
+      
+        - { path: ^/consultations,roles : ROLE_MEDECIN}
+        - { path: ^/consultation,roles : ROLE_MEDECIN}
+        - { path: ^/ajout_consultation,roles : ROLE_MEDECIN}
+        - { path: ^/modifier_consultation,roles : ROLE_MEDECIN}
+        - { path: ^/supprimer_consultation,roles : ROLE_MEDECIN}
+
+        - { path: ^/effets/secondaires,roles : ROLE_PHARMACIEN}
+        - { path: ^/effet/secondaire,roles : ROLE_PHARMACIEN}
+        - { path: ^/ajout_effet,roles : ROLE_PHARMACIEN}
+        - { path: ^/modifier/effet,roles : ROLE_PHARMACIEN}
+        - { path: ^/supprimer/effet,roles : ROLE_PHARMACIEN}
+
+        
 
 
 
